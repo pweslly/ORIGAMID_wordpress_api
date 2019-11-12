@@ -304,3 +304,7 @@
 172.27.0.1 - - [12/Nov/2019:21:38:50 +0000] "GET /favicon.ico HTTP/1.1" 200 5 "http://localhost:8091/wp-json/api/usuario/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
 172.27.0.1 - - [12/Nov/2019:21:44:50 +0000] "GET /wp-json/api/usuario/ HTTP/1.1" 200 53 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
 172.27.0.1 - - [12/Nov/2019:21:44:50 +0000] "GET /favicon.ico HTTP/1.1" 200 5 "http://localhost:8091/wp-json/api/usuario/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+172.27.0.1 - - [12/Nov/2019:21:56:20 +0000] "GET /wp-json/api/usuario/ HTTP/1.1" 200 53 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+172.27.0.1 - - [12/Nov/2019:21:56:20 +0000] "GET /favicon.ico HTTP/1.1" 200 5 "http://localhost:8091/wp-json/api/usuario/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+172.27.0.1 - - [12/Nov/2019:21:56:23 +0000] "GET /wp-json/api/usuario/ HTTP/1.1" 200 53 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
+172.27.0.1 - - [12/Nov/2019:21:56:23 +0000] "GET /favicon.ico HTTP/1.1" 200 5 "http://localhost:8091/wp-json/api/usuario/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"
