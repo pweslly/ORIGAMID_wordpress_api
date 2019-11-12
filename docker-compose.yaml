@@ -1,0 +1,89 @@
+version: '3'
+services:
+#MYSQL Service
+  db:
+    container_name: db
+    image: mysql:5.7
+    # Esse comando essencial algumas versão do docker para não dá erro no login do mysql
+    command: --innodb-use-native-aio=0
+    # Nome do Container
+    container_name: db
+    # Caso  ele caia ele suba novamente
+    restart: always
+    tty: true
+    ports:
+      - "33600:3306"
+    environment:
+      - MYSQL_DATABASE=wordpress
+      - MYSQL_ROOT_PASSWORD=wordpress
+      - MYSQL_USER=wordpress
+      - MYSQL_PASSWORD=wordpress
+    # Aqui copia os dados no mysql que está no container para uma pasta local do meu computador, assim se eu deletar o container não perco os dados do banco.
+    volumes:
+      - ./docker/dbdata:/var/lib/mysql
+    # Rede que ele faz parte para se comunicar com outros containers
+    networks:
+      - app-network
+
+#PHPMYADMIN  Service  
+  phpmyadmin:
+    container_name: phpmyadmin
+    # Aqui está baixando phpmyadmin do docker hub 
+    image: phpmyadmin/phpmyadmin:latest
+    # Aqui são variáveis de ambient para conectar ao mysql
+    environment:
+      - PMA_HOST=db
+      - PMA_USER=wordpress
+      - PMA_PASSWORD=wordpress
+    restart: always
+    ports:
+      - "8093:80"
+    networks:
+     - app-network 
+
+  #NGINX Service
+  # Aqui está em produção
+  # Mais o recomendado é usar dockerfile e fazer copy onde tem volume.
+  # Para o ambiente de desenvolvimento
+  web:
+    build:
+      context: ./docker/nginx 
+      dockerfile: Dockerfile-nginx
+    container_name: "nginx"
+    restart: always
+    ports: 
+      - "8091:80"
+    volumes:
+      - ./wordpress:/var/www/html 
+      - ./logs/nginx:/var/log/nginx
+    networks:
+      - app-network
+     
+  # Aqui está em produção
+  # Mais o recomendado é usar dockerfile e fazer copy onde tem volume.
+  # Para o ambiente de desenvolvimento
+  wordpress:
+    container_name: wordpress
+    image: wordpress:5.2.4-php7.1-fpm
+    ports:
+      - '9000:9000'
+    # Aqui são variavéis de ambiente para conectar ao banco         
+    environment:
+      WORDPRESS_DB_HOST: db 
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    restart: always 
+
+    volumes:
+      #- ./config/php.conf.ini:/usr/local/etc/php/conf.d/conf.ini
+      - ./wordpress:/var/www/html       
+   
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
