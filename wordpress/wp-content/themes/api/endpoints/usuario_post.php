@@ -1,9 +1,10 @@
 <?php
 function api_usuario_post($request)
 {
+  $usuario_email = $request['email'];
   $response = array(
-    'nome' => 'andre',
-    'email' => 'pablo@gmail.com'
+    'nome' => 'pablo',
+    'email' => $usuario_email
   );
 
 
@@ -26,8 +27,8 @@ function registrar_api_usuario_post()
   register_rest_route('api', '/usuario', array(
     array(
       # Aqui no metodo eu digo, se é post, put, delete entre outros.
-      #'methods' => WP_REST_Server::CREATABLE,
-      'methods' => 'GET',
+      'methods' => WP_REST_Server::CREATABLE,
+      #'methods' => 'GET',
       # Aqui retorno, nesse caso vai executar função lá em cima
       'callback' => 'api_usuario_post',
     ),
