@@ -1,10 +1,19 @@
 <?php
 function api_usuario_post($request)
 {
-  $usuario_email = $request['email'];
+  $email = $request['email'];
+  $senha = $request['senha'];
+  $nome = $request['nome'];
+  $rua = $request['rua'];
+  $cep = $request['cep'];
+  $numero = $request['numero'];
+  $bairro = $request['bairro'];
+  $cidade = $request['cidade'];
+  $estado = $request['estado'];
+
   $response = array(
-    'nome' => 'pablo',
-    'email' => $usuario_email
+    'nome' => $nome,
+    'email' => $email
   );
 
 
