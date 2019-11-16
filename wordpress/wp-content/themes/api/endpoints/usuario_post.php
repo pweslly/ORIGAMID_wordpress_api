@@ -1,21 +1,38 @@
 <?php
 function api_usuario_post($request)
 {
-  $email = $request['email'];
-  $senha = $request['senha'];
-  $nome = $request['nome'];
-  $rua = $request['rua'];
-  $cep = $request['cep'];
-  $numero = $request['numero'];
-  $bairro = $request['bairro'];
-  $cidade = $request['cidade'];
-  $estado = $request['estado'];
+  /*
+    Para tentar evitar que o usuário envie qualquer coisa vamos salientizar, uma função do wordpress
+    que vai verificar o que sendo repassado para api
+    pelo usuário.
+  */
+
+  $email = sanitize_email($request['email']);
+  $senha = sanitize_text_field($request['senha']);
+  $nome = sanitize_text_field($request['nome']);
+  $rua = sanitize_text_field($request['rua']);
+  $cep = sanitize_text_field($request['cep']);
+  $numero = sanitize_text_field($request['numero']);
+  $bairro = sanitize_text_field($request['bairro']);
+  $cidade = sanitize_text_field($request['cidade']);
+  $estado = sanitize_text_field($request['estado']);
+
+  /*
+    Criar uma função para sabe se já existe um usuário
+  */
+  $user_exists = username_exists($email);
+  $email_exists  = email_exists($email);
+  if (!$user_exists && !$email_exists && $email && $senha) {
+    /*
+      Função para criar usuário, é nativo do wordpress
+    */
+    wp_create_user($email, $senha, $email);
+  }
 
   $response = array(
     'nome' => $nome,
     'email' => $email
   );
-
 
   /* 
      Essa função vai retorna isso, quer dizer dê uma reposta do
