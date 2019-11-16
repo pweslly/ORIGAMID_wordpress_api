@@ -26,13 +26,24 @@ function api_usuario_post($request)
     /*
       Função para criar usuário, é nativo do wordpress
     */
-    wp_create_user($email, $senha, $email);
-  }
+    $user_id =  wp_create_user($email, $senha, $email);
 
-  $response = array(
-    'nome' => $nome,
-    'email' => $email
-  );
+    /*
+      Se quiser atualizar com outras informações
+    */
+
+    $response = array(
+      // Esse número único ID retorna da função wp_create_user
+      'ID' => $user_id,
+      'display_name' => $nome,
+      'first_name' => $nome,
+      'role' => 'subscriber',
+    );
+    // Ai depois que passo para atualizar a resposta. Coloco response la dentro da função wp_update_user
+    wp_update_user($response);
+  } else {
+    $response = new WP_Error('email', 'Email já cadastrado.', array('status' => 403));
+  }
 
   /* 
      Essa função vai retorna isso, quer dizer dê uma reposta do
