@@ -61,8 +61,8 @@ function api_usuario_post($request)
   }
 
   /* 
-     Essa função vai retorna isso, quer dizer dê uma reposta do
-     tipo api do wordpress 
+     Essa função vai retorna isso, quer dizer vai me dá uma reposta do
+     tipo api do wordpress. Tipo vai exibir o resultado do cadastro
   */
   return rest_ensure_response($response);
 }
