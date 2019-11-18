@@ -32,6 +32,7 @@ function api_usuario_get($request)
   } else {
     $response = new WP_Error('permissao', 'Usuario não tem permisão', array('status' => 401));
   }
+
   return rest_ensure_response($response);
 }
 
